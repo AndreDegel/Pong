@@ -31,9 +31,16 @@ class Controls extends GameDisplay implements KeyListener {
     public void keyTyped(KeyEvent ev) {
         char keyPressed = ev.getKeyChar();
         char q = 'q';
+        char r = 'r';
         if( keyPressed == q){
             System.exit(0);    //quit if user presses the q key.
         }
+        if (gameOver && keyPressed == r){
+            ballX = 150;        //reset the ball
+            removeGameOver = true;
+            gameOver = false;
+        }
+
     }
 
     @Override
@@ -43,6 +50,7 @@ class Controls extends GameDisplay implements KeyListener {
     public void keyPressed(KeyEvent ev) {
 
         removeInstructions = true;   //game has started
+        removeGameOver = false;
 
         if (ev.getKeyCode() == KeyEvent.VK_DOWN) {
             System.out.println("down key");
@@ -116,8 +124,12 @@ class Controls extends GameDisplay implements KeyListener {
 
         if (ballX <= 0 || ballX >= screenSize ) {
             gameOver = true;
-            return;
+            //return;
         }
+        if (gameOver){
+            //return;
+        }
+
         if (ballY <= 0 || ballY >= screenSize-ballSize) {
             hitWall = true;
         }

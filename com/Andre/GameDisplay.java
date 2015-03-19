@@ -22,19 +22,21 @@ class GameDisplay extends JPanel {
 
     static boolean gameOver;      //Used to work out what message, if any, to display on the screen
     static boolean removeInstructions = false;  // Same as above
-    
+    static boolean restart = false; //Used to work out the restart of the game.
+    static boolean removeGameOver = false;
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         //System.out.println("* Repaint *");
 
-        if (gameOver == true) {
+        if (gameOver == true && !removeGameOver) {
             //see the color for the Game over text
             g.setColor(Color.red);
             g.drawString( "Game over!", 20, 30 );
-
-            return;
+            g.drawString("Press r to restart the game", 20, 60);
+            //restart = true;
+            //return;
         }
 
         if (removeInstructions == false ) {

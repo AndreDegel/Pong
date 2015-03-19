@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+//TODO:RESTART ALMOST DONE
 
 //TODO have paddle speed affect ball's direction
 //TODO known issue - sometimes ball gets stuck behind human paddle
@@ -100,14 +100,24 @@ public class Main {
 
                 if (gamePanel.gameOver) {
                     timer.stop();
-                    //timer.restart();
+
+
                 }
+
                 gamePanel.repaint();
+                //if (gamePanel.restart){
+                    //return;
+                if (gamePanel.removeGameOver){
+                    timer.restart();
+                }
+
+               // }
             }
         };
 
         timer = new Timer(gameSpeed, gameUpdater);
         timer.start();    //Every time the timer ticks, the actionPerformed method of the ActionListener is called
+
     }
 }
 
