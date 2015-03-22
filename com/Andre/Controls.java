@@ -17,6 +17,7 @@ class Controls extends GameDisplay implements KeyListener {
     static double ballSpeed = 5;   //Again, pixels moved per clock tick
 
 
+
     //An angle in radians (which range from 0 to 2xPI (0 to about 6.3).
     //This starts the ball moving down toward the human. Replace with some of the other
     //commented out versions for a different start angle
@@ -39,6 +40,7 @@ class Controls extends GameDisplay implements KeyListener {
             ballX = 150;        //reset the ball
             removeGameOver = true;
             gameOver = false;
+            scoreCount = false;
         }
 
     }
@@ -126,9 +128,6 @@ class Controls extends GameDisplay implements KeyListener {
             gameOver = true;
             //return;
         }
-        if (gameOver){
-            //return;
-        }
 
         if (ballY <= 0 || ballY >= screenSize-ballSize) {
             hitWall = true;
@@ -144,14 +143,14 @@ class Controls extends GameDisplay implements KeyListener {
             hitComputerPaddle = true;
 
 
-        if (hitWall == true) {
+        if (hitWall) {
             //bounce
             ballDirection = ( (2 * Math.PI) - ballDirection );
             System.out.println("ball direction " + ballDirection);
         }
 
         //Bounce off computer paddle - just need to modify direction
-        if (hitComputerPaddle == true) {
+        if (hitComputerPaddle) {
             ballDirection = (Math.PI) - ballDirection;
             //TODO factor in speed into new direction
             //TODO So if paddle is moving down quickly, the ball will angle more down too
@@ -159,7 +158,7 @@ class Controls extends GameDisplay implements KeyListener {
         }
 
         //Bounce off computer paddle - just need to modify direction
-        if (hitHumanPaddle == true) {
+        if (hitHumanPaddle) {
             ballDirection = (Math.PI) - ballDirection;
             //TODO consider speed of paddle
         }

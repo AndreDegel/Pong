@@ -22,24 +22,36 @@ class GameDisplay extends JPanel {
 
     static boolean gameOver;      //Used to work out what message, if any, to display on the screen
     static boolean removeInstructions = false;  // Same as above
-    static boolean restart = false; //Used to work out the restart of the game.
-    static boolean removeGameOver = false;
+    static boolean scoreCount = false;         //Used to stope score count from adding while gameover.
+    static boolean removeGameOver = false;//Used to work out the restart of the game. and display removal of game over
+    static int computerWin = 0;
+    static int humanWin = 0;
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         //System.out.println("* Repaint *");
+        if (gameOver && !scoreCount){
+            if(ballX <= 0){
+                humanWin++;
+            }
+            else {computerWin++;}
+        }
 
-        if (gameOver == true && !removeGameOver) {
+        if (gameOver && !removeGameOver) {
             //see the color for the Game over text
             g.setColor(Color.red);
             g.drawString( "Game over!", 20, 30 );
-            g.drawString("Press r to restart the game", 20, 60);
-            //restart = true;
-            //return;
+            g.drawString("Score: " +  "Player Won =" + humanWin + " Computer Won =" + computerWin, 20, 60);
+            g.drawString("Press r to restart the game", 20, 90);
+
+            scoreCount = true;
+
+            return;
         }
 
-        if (removeInstructions == false ) {
+        if (!removeInstructions) {
             //set the color for the beginning text
             g.setColor(Color.black);
             g.drawString("Pong! Press up or down to move", 20, 30);
